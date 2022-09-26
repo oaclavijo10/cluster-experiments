@@ -1,0 +1,1214 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Functions to design and run clustered experiments">
+      
+      
+        <link rel="canonical" href="https://david26694.github.io/cluster-experiments/api/random_splitter.html">
+      
+      
+        <meta name="author" content="David Masip">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.6.3">
+    
+    
+      
+        <title>Splitter - Cluster Experiments Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../style.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#from-cluster_experimentsrandom_splitter-import" tabindex="0" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://david26694.github.io/cluster-experiments/" title="Cluster Experiments Docs" aria-label="Cluster Experiments Docs" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Cluster Experiments Docs
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Splitter
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/david26694/cluster-experiments/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../index.html" class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="experiment_analysis.html" class="md-tabs__link md-tabs__link--active">
+          API
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://david26694.github.io/cluster-experiments/" title="Cluster Experiments Docs" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Cluster Experiments Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/david26694/cluster-experiments/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="experiment_analysis.html" title="Experiment analysis" class="md-nav__link">
+      Experiment analysis
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="perturbator.html" title="Perturbators" class="md-nav__link">
+      Perturbators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Splitter
+      </label>
+    
+    <a href="random_splitter.html" title="Splitter" class="md-nav__link md-nav__link--active">
+      Splitter
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedClusteredSplitter" class="md-nav__link">
+    BalancedClusteredSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedClusteredSplitter.get_balanced_sample" class="md-nav__link">
+    get_balanced_sample()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedClusteredSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedSwitchbackSplitter" class="md-nav__link">
+    BalancedSwitchbackSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedSwitchbackSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.ClusteredSplitter" class="md-nav__link">
+    ClusteredSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.ClusteredSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.ClusteredSplitter.treatment_assignment" class="md-nav__link">
+    treatment_assignment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter" class="md-nav__link">
+    RandomSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter.assign_treatment_df" class="md-nav__link">
+    assign_treatment_df()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter.from_config" class="md-nav__link">
+    from_config()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter.treatment_assignment" class="md-nav__link">
+    treatment_assignment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.SwitchbackSplitter" class="md-nav__link">
+    SwitchbackSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.SwitchbackSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.SwitchbackSplitter.treatment_assignment" class="md-nav__link">
+    treatment_assignment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="cupac_model.html" title="Pre experiment outcome model" class="md-nav__link">
+      Pre experiment outcome model
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="power_config.html" title="Power config" class="md-nav__link">
+      Power config
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="power_analysis.html" title="Power analysis" class="md-nav__link">
+      Power analysis
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedClusteredSplitter" class="md-nav__link">
+    BalancedClusteredSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedClusteredSplitter.get_balanced_sample" class="md-nav__link">
+    get_balanced_sample()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedClusteredSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedSwitchbackSplitter" class="md-nav__link">
+    BalancedSwitchbackSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.BalancedSwitchbackSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.ClusteredSplitter" class="md-nav__link">
+    ClusteredSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.ClusteredSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.ClusteredSplitter.treatment_assignment" class="md-nav__link">
+    treatment_assignment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter" class="md-nav__link">
+    RandomSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter.assign_treatment_df" class="md-nav__link">
+    assign_treatment_df()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter.from_config" class="md-nav__link">
+    from_config()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.RandomSplitter.treatment_assignment" class="md-nav__link">
+    treatment_assignment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.SwitchbackSplitter" class="md-nav__link">
+    SwitchbackSplitter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.SwitchbackSplitter.sample_treatment" class="md-nav__link">
+    sample_treatment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster_experiments.random_splitter.SwitchbackSplitter.treatment_assignment" class="md-nav__link">
+    treatment_assignment()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/david26694/cluster-experiments/edit/master/docs/api/random_splitter.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="from-cluster_experimentsrandom_splitter-import"><code>from cluster_experiments.random_splitter import *</code><a class="headerlink" href="#from-cluster_experimentsrandom_splitter-import" title="Permanent link">&para;</a></h1>
+<h2 id="cluster_experiments.random_splitter.BalancedClusteredSplitter"><code class="highlight"><span class="n">BalancedClusteredSplitter</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.BalancedClusteredSplitter" title="Permanent link">&para;</a></h2>
+<p>Like ClusteredSplitter, but ensures that treatments are balanced among clusters. That is, if we have
+    25 clusters and 2 treatments, 13 clusters should have treatment A and 12 clusters should have treatment B.</p>
+<h3 id="cluster_experiments.random_splitter.BalancedClusteredSplitter.get_balanced_sample"><code class="highlight"><span class="n">get_balanced_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clusters_per_treatment</span><span class="p">,</span> <span class="n">remainder_clusters</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.BalancedClusteredSplitter.get_balanced_sample" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">get_balanced_sample</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">clusters_per_treatment</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">remainder_clusters</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Given the number of clusters per treatment and the remainder clusters (results</span>
+<span class="sd">        of the integer division between the number of clusters and the number of treatments),</span>
+<span class="sd">        obtain, in the most balanced way, a list of treatments such that the difference between</span>
+<span class="sd">        the number of clusters per treatment is minimal among clusters&quot;&quot;&quot;</span>
+        <span class="n">remainder_treatments</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">remainder_clusters</span><span class="p">)</span>
+
+        <span class="n">sampled_treatments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">treatment</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">:</span>
+            <span class="n">sampled_treatments</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">treatment</span><span class="p">]</span> <span class="o">*</span> <span class="n">clusters_per_treatment</span><span class="p">)</span>
+        <span class="n">sampled_treatments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">remainder_treatments</span><span class="p">)</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">sampled_treatments</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sampled_treatments</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Given the number of clusters per treatment and the remainder clusters (results
+of the integer division between the number of clusters and the number of treatments),
+obtain, in the most balanced way, a list of treatments such that the difference between
+the number of clusters per treatment is minimal among clusters</p>
+<h3 id="cluster_experiments.random_splitter.BalancedClusteredSplitter.sample_treatment"><code class="highlight"><span class="n">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.BalancedClusteredSplitter.sample_treatment" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Randomly assign a treatment to a cluster&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;There are more treatments than clusters&quot;</span><span class="p">)</span>
+        <span class="n">clusters_per_treatment</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">)</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">)</span>
+        <span class="n">remainder_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_balanced_sample</span><span class="p">(</span><span class="n">clusters_per_treatment</span><span class="p">,</span> <span class="n">remainder_clusters</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Randomly assign a treatment to a cluster</p>
+<h2 id="cluster_experiments.random_splitter.BalancedSwitchbackSplitter"><code class="highlight"><span class="n">BalancedSwitchbackSplitter</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.BalancedSwitchbackSplitter" title="Permanent link">&para;</a></h2>
+<p>Like SwitchbackSplitter, but ensures that treatments are balanced among clusters.</p>
+<p>Usage:
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">cluster_experiments.random_splitter</span> <span class="kn">import</span> <span class="n">BalancedSwitchbackSplitter</span>
+<span class="n">splitter</span> <span class="o">=</span> <span class="n">BalancedSwitchbackSplitter</span><span class="p">(</span>
+    <span class="n">clusters</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span>
+    <span class="n">treatments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span>
+    <span class="n">dates</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2020-01-02&quot;</span><span class="p">],</span>
+    <span class="n">cluster_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;date&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2020-01-02&quot;</span><span class="p">,</span> <span class="s2">&quot;2020-01-01&quot;</span><span class="p">]})</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">splitter</span><span class="o">.</span><span class="n">assign_treatment_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="cluster_experiments.random_splitter.BalancedSwitchbackSplitter.sample_treatment"><code class="highlight"><span class="n">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.BalancedSwitchbackSplitter.sample_treatment" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dates</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;There are more treatments than clusters and dates&quot;</span><span class="p">)</span>
+
+        <span class="n">total_switches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dates</span><span class="p">)</span>
+        <span class="n">clusters_per_treatment</span> <span class="o">=</span> <span class="n">total_switches</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">)</span>
+        <span class="n">remainder_clusters</span> <span class="o">=</span> <span class="n">total_switches</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_balanced_sample</span><span class="p">(</span><span class="n">clusters_per_treatment</span><span class="p">,</span> <span class="n">remainder_clusters</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Randomly assign a treatment to a cluster</p>
+<h2 id="cluster_experiments.random_splitter.ClusteredSplitter"><code class="highlight"><span class="n">ClusteredSplitter</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.ClusteredSplitter" title="Permanent link">&para;</a></h2>
+<p>Splits randomly using clusters
+Usage:
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">cluster_experiments.random_splitter</span> <span class="kn">import</span> <span class="n">ClusteredSplitter</span>
+<span class="n">splitter</span> <span class="o">=</span> <span class="n">ClusteredSplitter</span><span class="p">(</span>
+    <span class="n">clusters</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span>
+    <span class="n">treatments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span>
+    <span class="n">cluster_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]})</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">splitter</span><span class="o">.</span><span class="n">assign_treatment_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="cluster_experiments.random_splitter.ClusteredSplitter.sample_treatment"><code class="highlight"><span class="n">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.ClusteredSplitter.sample_treatment" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Choose randomly a treatment for each cluster&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Choose randomly a treatment for each cluster</p>
+<h3 id="cluster_experiments.random_splitter.ClusteredSplitter.treatment_assignment"><code class="highlight"><span class="n">treatment_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sampled_treatments</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.ClusteredSplitter.treatment_assignment" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">treatment_assignment</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sampled_treatments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Assign each sampled treatment to a cluster&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;treatment&quot;</span><span class="p">:</span> <span class="n">treatment</span><span class="p">,</span> <span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="n">cluster</span><span class="p">}</span>
+            <span class="k">for</span> <span class="n">treatment</span><span class="p">,</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sampled_treatments</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">)</span>
+        <span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Assign each sampled treatment to a cluster</p>
+<h2 id="cluster_experiments.random_splitter.RandomSplitter"><code class="highlight"><span class="n">RandomSplitter</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.RandomSplitter" title="Permanent link">&para;</a></h2>
+<p>Abstract class to split instances in a switchback or clustered way. It can be used to create a calendar/split of clusters
+or to run a power analysis.</p>
+<p>In order to create your own RandomSplitter, you need to write two methods:
+* treatment_assignment: If you are deriving from clustered or switchback splitters, no need for this. The goal of this is, given the output of sample_treatment,
+prepare such that it can be added to the dataframe by building a list of dictionaries with clusters and treatments.
+* sample_treatment: This is what needs to be implemented. It should return a list of same length as the number of clusters, with the treatment
+received to each cluster.</p>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clusters</code></td>
+<td><code>List[str]</code></td>
+<td>list of clusters to split</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>treatments</code></td>
+<td><code>Optional[List[str]]</code></td>
+<td>list of treatments</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>dates</code></td>
+<td><code>Optional[List[str]]</code></td>
+<td>list of dates (switches)</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>cluster_mapping</code></td>
+<td><code>Optional[Dict[str, str]]</code></td>
+<td _city_="&quot;city&quot;," _cluster_:="&quot;cluster&quot;:" _date_="&quot;date&quot;" _date_:="&quot;date&quot;:">dictionary to map the keys cluster and date to the actual names of the columns of the dataframe. For clustered splitter, cluster_mapping could be {"cluster": "city"}. for SwitchbackSplitter, cluster_mapping could be</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="cluster_experiments.random_splitter.RandomSplitter.assign_treatment_df"><code class="highlight"><span class="n">assign_treatment_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.RandomSplitter.assign_treatment_df" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">assign_treatment_df</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Takes a df, randomizes treatments and adds the treatment column to the dataframe</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            df: dataframe to assign treatments to</span>
+<span class="sd">            args: arguments to pass to sample_treatment</span>
+<span class="sd">            kwargs: keyword arguments to pass to sample_treatment</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">sampled_treatments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_treatment</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">treatments_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">treatment_assignment</span><span class="p">(</span><span class="n">sampled_treatments</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cluster_mapping</span><span class="p">)</span>
+        <span class="n">join_columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cluster_mapping</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">treatments_df</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">join_columns</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Takes a df, randomizes treatments and adds the treatment column to the dataframe</p>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>df</code></td>
+<td><code>DataFrame</code></td>
+<td>dataframe to assign treatments to</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>*args</code></td>
+<td></td>
+<td>arguments to pass to sample_treatment</td>
+<td><code>()</code></td>
+</tr>
+<tr>
+<td><code>**kwargs</code></td>
+<td></td>
+<td>keyword arguments to pass to sample_treatment</td>
+<td><code>{}</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="cluster_experiments.random_splitter.RandomSplitter.from_config"><code class="highlight"><span class="n">from_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code> <em>(classmethod)</em><a class="headerlink" href="#cluster_experiments.random_splitter.RandomSplitter.from_config" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a RandomSplitter from a PowerConfig&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">clusters</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">clusters</span><span class="p">,</span>
+            <span class="n">treatments</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">treatments</span><span class="p">,</span>
+            <span class="n">dates</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">dates</span><span class="p">,</span>
+            <span class="n">cluster_mapping</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">cluster_mapping</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Creates a RandomSplitter from a PowerConfig</p>
+<h3 id="cluster_experiments.random_splitter.RandomSplitter.sample_treatment"><code class="highlight"><span class="n">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.RandomSplitter.sample_treatment" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Randomly samples treatments for each cluster.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Randomly samples treatments for each cluster.</p>
+<h3 id="cluster_experiments.random_splitter.RandomSplitter.treatment_assignment"><code class="highlight"><span class="n">treatment_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sampled_treatments</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.RandomSplitter.treatment_assignment" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">treatment_assignment</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sampled_treatments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepares the data of the treatment assignment for the dataframe. It should take as input some list of treatments [&quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;A&quot;] and return a list of dictionaries,</span>
+<span class="sd">        where each element has information about the cluster and treatment, like {&quot;cluster&quot;: &quot;Cluster 1&quot;, &quot;treatment&quot;: &quot;A&quot;}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Prepares the data of the treatment assignment for the dataframe. It should take as input some list of treatments ["A", "B", "B", "A"] and return a list of dictionaries,
+where each element has information about the cluster and treatment, like {"cluster": "Cluster 1", "treatment": "A"}.</p>
+<h2 id="cluster_experiments.random_splitter.SwitchbackSplitter"><code class="highlight"><span class="n">SwitchbackSplitter</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.SwitchbackSplitter" title="Permanent link">&para;</a></h2>
+<p>Splits randomly using clusters and dates</p>
+<p>Usage:
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">cluster_experiments.random_splitter</span> <span class="kn">import</span> <span class="n">SwitchbackSplitter</span>
+<span class="n">splitter</span> <span class="o">=</span> <span class="n">SwitchbackSplitter</span><span class="p">(</span>
+    <span class="n">clusters</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span>
+    <span class="n">treatments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span>
+    <span class="n">dates</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2020-01-02&quot;</span><span class="p">],</span>
+    <span class="n">cluster_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;date&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2020-01-02&quot;</span><span class="p">,</span> <span class="s2">&quot;2020-01-01&quot;</span><span class="p">]})</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">splitter</span><span class="o">.</span><span class="n">assign_treatment_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="cluster_experiments.random_splitter.SwitchbackSplitter.sample_treatment"><code class="highlight"><span class="n">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.SwitchbackSplitter.sample_treatment" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">sample_treatment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Randomly assign a treatment to a cluster&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treatments</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dates</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Randomly assign a treatment to a cluster</p>
+<h3 id="cluster_experiments.random_splitter.SwitchbackSplitter.treatment_assignment"><code class="highlight"><span class="n">treatment_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sampled_treatments</span><span class="p">)</span></code><a class="headerlink" href="#cluster_experiments.random_splitter.SwitchbackSplitter.treatment_assignment" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Show source code in <code>cluster_experiments/random_splitter.py</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">treatment_assignment</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sampled_treatments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;For each date, we get, on each cluster, the treatment assigned to it&quot;&quot;&quot;</span>
+        <span class="n">sampled_treatments</span> <span class="o">=</span> <span class="n">sampled_treatments</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dates</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">):</span>
+            <span class="n">treatment</span> <span class="o">=</span> <span class="n">sampled_treatments</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> <span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="n">cluster</span><span class="p">,</span> <span class="s2">&quot;treatment&quot;</span><span class="p">:</span> <span class="n">treatment</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">output</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>For each date, we get, on each cluster, the treatment assigned to it</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="perturbator.html" title="Perturbators" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Perturbators
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="cupac_model.html" title="Pre experiment outcome model" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Pre experiment outcome model
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2022 Maintained by David Masip.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
+      
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
